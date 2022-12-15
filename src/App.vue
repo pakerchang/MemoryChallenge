@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import LayoutPublic from '@/components/layout/LayoutPublic.vue';
 </script>
 
 <template>
-  <div class="flex flex-col">
-    <h1 class="text-gray-400">asdfwer</h1>
-  </div>
+  <LayoutPublic>
+  </LayoutPublic>
 </template>
