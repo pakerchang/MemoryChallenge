@@ -1,5 +1,5 @@
 <template>
-  <div class="w-2/5 h-2/5 border-2 border-gray-400">
+  <div class="w-3/5 h-3/5">
     <slot></slot>
   </div>
 </template>
