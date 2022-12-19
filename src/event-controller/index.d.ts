@@ -1,12 +1,21 @@
 interface GameDataType {
   content: string;
-  compareStatus: boolean;
+  isCompare: boolean;
+  index: number;
 }
 
 interface GenerateData {
-  (rows: number, source: any[]): object[];
+  (rows: number, source: string[]): GameDataType[];
 }
 
 interface CompareCard {
-  (firstCard: GameDataType, secondCard: GameDataType): boolean;
+  (firstCard: GameDataType, secondCard: GameDataType): object;
+}
+
+interface StateType {
+  data: object[];
+}
+
+interface StateListener {
+  (state: StateType, firstCard: GameDataType, secondCard: GameDataType): object[];
 }
