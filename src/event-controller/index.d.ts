@@ -8,5 +8,5 @@ interface GenerateData {
 }
 
 interface CompareCard {
-  (firstCard: object, secondCard: object): boolean;
+  (firstCard: GameDataType, secondCard: GameDataType): boolean;
 }

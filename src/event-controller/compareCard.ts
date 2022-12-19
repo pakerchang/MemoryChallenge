@@ -1,2 +1,2 @@
 export const compareCard: CompareCard = (firstCard, secondCard) =>
-  firstCard === secondCard ? true : false;
+  firstCard.content === secondCard.content ? true : false;
