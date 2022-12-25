@@ -10,15 +10,28 @@ const selectCard = ref<{}>({})
 
 const handleClick = (data: object) => selectCard.value = data
 
-watch(selectCard, (nV, oV) => {
+watch(selectCard, (nV: GameDataType, oV: GameDataType) => {
   const result = compareCard(oV, nV)
   if (Object.keys(oV).length !== 0) {
+    const oIndex = cardData.value.indexOf(oV)
+    const nIndex = cardData.value.indexOf(nV)
     if (result.length === 0) {
-      selectCard.value = {}
-    } else {
-      console.log(result)
-    }
+      setTimeout(() => {
 
+        if (oIndex !== -1 && nIndex !== -1) {
+          cardData.value[oIndex] = { ...cardData.value[oIndex], isClick: false }
+          cardData.value[nIndex] = { ...cardData.value[nIndex], isClick: false }
+        }
+        selectCard.value = {}
+        // Reset temp value
+      }, 500)
+    } else {
+      if (oIndex !== -1 && nIndex !== -1) {
+        cardData.value[oIndex] = { ...cardData.value[oIndex], isCompare: true }
+        cardData.value[nIndex] = { ...cardData.value[nIndex], isCompare: true }
+      }
+      selectCard.value = {}
+    }
   }
 })
 
