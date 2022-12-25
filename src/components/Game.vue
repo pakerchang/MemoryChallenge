@@ -9,6 +9,6 @@ const initData = reactive(generateData(4, ["A", "B", "C", "D"]))
 
 <template>
   <LayoutGame>
-    <Cards />
+    <Cards :data="initData" />
   </LayoutGame>
 </template>

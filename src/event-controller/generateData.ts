@@ -15,6 +15,7 @@ export const generateData: GenerateData = (row, resource) => {
       .map((item, index) => ({
         content: item,
         isCompare: false,
+        isClick: false,
         index: index,
       }))
   );
