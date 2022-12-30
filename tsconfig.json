@@ -1,6 +1,12 @@
 {
   "compilerOptions": {
     "target": "ESNext",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
     "useDefineForClassFields": true,
     "module": "ESNext",
     "moduleResolution": "Node",
@@ -14,13 +20,7 @@
       "DOM"
     ],
     "skipLibCheck": true,
-    "noEmit": true,
-    "baseUrl": ",",
-    "paths": {
-      "@/*": [
-        "/src/*"
-      ]
-    }
+    "noEmit": true
   },
   "include": [
     "src/**/*.ts",

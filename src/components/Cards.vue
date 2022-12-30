@@ -23,8 +23,7 @@ watch(selectCard, (nV: GameDataType, oV: GameDataType) => {
           cardData.value[nIndex] = { ...cardData.value[nIndex], isClick: false }
         }
         selectCard.value = {}
-        // Reset temp value
-      }, 500)
+      }, 200)
     } else {
       if (oIndex !== -1 && nIndex !== -1) {
         cardData.value[oIndex] = { ...cardData.value[oIndex], isCompare: true }

@@ -6,7 +6,7 @@ import { compareCard } from "./compareCard";
 
 export const stateListener: StateListener = (state, firstCard, secondCard) => {
   const renderState = state;
-  const compareResult = compareCard(firstCard, secondCard, renderState);
+  const compareResult = compareCard(firstCard, secondCard);
 
   return [];
 };
