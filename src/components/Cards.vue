@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, watch, onUnmounted } from "vue";
+import { compareCard } from "@/event-controller/compareCard";
 import Card from "@/components/shared/Card.vue";
 
 const props = defineProps<{
@@ -15,17 +16,7 @@ const handleClick = (data: GameDataType) => {
 
 const stopWatchSelectData = watch(selectData, (nV, oV) => {
   if (nV.length === 2) {
-    const firstCard = cardData.value.indexOf(nV[0]);
-    const secondCard = cardData.value.indexOf(nV[1]);
-    if (nV[0].content === nV[1].content) {
-      cardData.value[firstCard] = { ...cardData.value[firstCard], isCompare: true };
-      cardData.value[secondCard] = { ...cardData.value[secondCard], isCompare: true };
-    } else {
-      setTimeout(() => {
-        cardData.value[firstCard] = { ...cardData.value[firstCard], isClick: false };
-        cardData.value[secondCard] = { ...cardData.value[secondCard], isClick: false };
-      }, 200);
-    }
+    cardData.value = compareCard(cardData.value, nV);
     selectData.value.length = 0;
   }
 });

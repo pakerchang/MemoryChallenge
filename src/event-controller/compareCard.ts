@@ -1,17 +1,18 @@
-export const compareCard: CompareCard = (
-  firstCard: GameDataType,
-  secondCard: GameDataType
-): object[] => {
-  let compareResult: object[] = [];
-  if (Object.keys(firstCard).length !== 0 && Object.keys(secondCard).length !== 0) {
-    if (compareResult.length > 0) compareResult.length = 0; // reset compare bucket
-    if (firstCard.content === secondCard.content) {
-      compareResult = [
-        ...compareResult,
-        { ...firstCard, isCompare: true },
-        { ...secondCard, isCompare: true },
-      ];
-    }
+interface CompareFnType {
+  (Cards: GameDataType[], pairCard: GameDataType[]): GameDataType[];
+}
+
+export const compareCard: CompareFnType = (total, pairCard): any => {
+  const firstCard = total.indexOf(pairCard[0]);
+  const secondCard = total.indexOf(pairCard[1]);
+  if (pairCard[0].content === pairCard[1].content) {
+    total[firstCard] = { ...total[firstCard], isCompare: true };
+    total[secondCard] = { ...total[secondCard], isCompare: true };
+  } else {
+    setTimeout(() => {
+      total[firstCard] = { ...total[firstCard], isClick: false };
+      total[secondCard] = { ...total[secondCard], isClick: false };
+    }, 200);
   }
-  return compareResult;
+  return total;
 };

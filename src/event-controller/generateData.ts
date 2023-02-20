@@ -1,5 +1,8 @@
 // Resource example = ["A", "B", "C", "D"];
-export const generateData: GenerateData = (row, resource) => {
+interface GenerateDataType {
+  (rows: number, source: string[], data?: object[]): GameDataType[];
+}
+export const generateData: GenerateDataType = (row, resource) => {
   const shuffleCard = (arr: GameDataType[]) => {
     for (let i = arr.length - 1; i > 0; i--) {
       let j = Math.floor(Math.random() * (i + 1));
