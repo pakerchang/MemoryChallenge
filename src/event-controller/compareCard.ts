@@ -4,7 +4,7 @@ export const compareCard: CompareCard = (
 ): object[] => {
   let compareResult: object[] = [];
   if (Object.keys(firstCard).length !== 0 && Object.keys(secondCard).length !== 0) {
-    if (compareResult.length > 0) compareResult.length = 0;
+    if (compareResult.length > 0) compareResult.length = 0; // reset compare bucket
     if (firstCard.content === secondCard.content) {
       compareResult = [
         ...compareResult,

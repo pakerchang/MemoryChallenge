@@ -1,39 +1,36 @@
 <script setup lang="ts">
-import { compareCard } from '../event-controller/compareCard';
-import { ref, watch } from 'vue'
-import Card from '@/components/shared/Card.vue';
+import { ref, watch, onUnmounted } from "vue";
+import Card from "@/components/shared/Card.vue";
+
 const props = defineProps<{
-  data: GameDataType[]
-}>()
-const cardData = ref(props.data)
-const selectCard = ref<{}>({})
+  data: GameDataType[];
+}>();
 
-const handleClick = (data: object) => selectCard.value = data
+const cardData = ref(props.data);
+const selectData = ref<GameDataType[]>([]);
 
-watch(selectCard, (nV: GameDataType, oV: GameDataType) => {
-  const result = compareCard(oV, nV)
-  if (Object.keys(oV).length !== 0) {
-    const oIndex = cardData.value.indexOf(oV)
-    const nIndex = cardData.value.indexOf(nV)
-    if (result.length === 0) {
-      setTimeout(() => {
+const handleClick = (data: GameDataType) => {
+  selectData.value = [...selectData.value, data];
+};
 
-        if (oIndex !== -1 && nIndex !== -1) {
-          cardData.value[oIndex] = { ...cardData.value[oIndex], isClick: false }
-          cardData.value[nIndex] = { ...cardData.value[nIndex], isClick: false }
-        }
-        selectCard.value = {}
-      }, 200)
+const stopWatchSelectData = watch(selectData, (nV, oV) => {
+  if (nV.length === 2) {
+    const firstCard = cardData.value.indexOf(nV[0]);
+    const secondCard = cardData.value.indexOf(nV[1]);
+    if (nV[0].content === nV[1].content) {
+      cardData.value[firstCard] = { ...cardData.value[firstCard], isCompare: true };
+      cardData.value[secondCard] = { ...cardData.value[secondCard], isCompare: true };
     } else {
-      if (oIndex !== -1 && nIndex !== -1) {
-        cardData.value[oIndex] = { ...cardData.value[oIndex], isCompare: true }
-        cardData.value[nIndex] = { ...cardData.value[nIndex], isCompare: true }
-      }
-      selectCard.value = {}
+      setTimeout(() => {
+        cardData.value[firstCard] = { ...cardData.value[firstCard], isClick: false };
+        cardData.value[secondCard] = { ...cardData.value[secondCard], isClick: false };
+      }, 200);
     }
+    selectData.value.length = 0;
   }
-})
+});
 
+onUnmounted(stopWatchSelectData);
 </script>
 <template>
   <div class="w-full h-full grid grid-cols-4 justify-center content-center">
