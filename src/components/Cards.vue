@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import Card from "@/components/shared/Card.vue";
+import { ref, onUnmounted, watch } from "vue";
 
 const props = defineProps<{
   data: GameDataType[];
@@ -15,14 +14,17 @@ const selectData = ref<GameDataType[]>([]);
 const handleClick = (data: GameDataType, idx: number) => {
   props.data[idx].isClick = true;
   selectData.value = [...selectData.value, data];
+};
+const stopWatchSelectData = watch(selectData, () => {
   if (selectData.value.length === 2) {
     setTimeout(() => {
       emits("updateData", selectData.value);
       selectData.value.length = 0;
-    }, 700);
+    }, 400);
   }
-};
-const handleFilp = (idx) => {};
+});
+
+onUnmounted(stopWatchSelectData);
 </script>
 <template>
   <div class="w-full grid grid-cols-4 gap-3 place-items-center custom-perspective">
@@ -33,8 +35,7 @@ const handleFilp = (idx) => {};
       @click="handleClick(item, idx)"
       class="w-[120px] h-[140px] border border-gray-400"
       :class="{
-        'ease-in-out custom-preserve-3d duration-1000 custom-rotate-y-180':
-          item.isClick && !item.compare,
+        'ease-in-out custom-preserve-3d duration-1000 custom-rotate-y-180': item.isClick,
       }"
     >
       <div
