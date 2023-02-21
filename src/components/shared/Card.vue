@@ -14,12 +14,18 @@ const handleClick = (): void => {
 
 <template>
   <div
-    class="w-[100px] h-[100px] flex justify-center items-center border border-gray-400"
+    class="relative w-[120px] h-[140px] border border-gray-400 ease-in-out custom-preserve-3d duration-1000"
     @click="handleClick"
   >
-    <!-- Status True -->
-    <div v-if="data.isClick">{{ data.content }}</div>
-    <!-- Status False -->
-    <div v-else class="bg-gray-600"></div>
+    <div
+      class="absolute w-full h-full flex justify-center items-center bg-gray-600 backface-hidden"
+    />
+
+    <div
+      class="absolute w-full h-full flex justify-center items-center"
+      :class="{ 'custom-rotate-y-180 backface-hidden': data.isClick }"
+    >
+      {{ data.content }}
+    </div>
   </div>
 </template>

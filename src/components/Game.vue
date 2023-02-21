@@ -11,12 +11,12 @@ const resetGame = (): void => {
   initData.value = resetGame;
 };
 
-const handleData = (data: GameDataType[]): void => {
-  initData.value = compareCard(initData.value, data);
-};
+const handleData = (data: GameDataType[]): void =>
+  (initData.value = compareCard(initData.value, data));
 
 const stopWatchRenderData = watch(initData.value, (nV, oV) => {
-  if (initData.value.filter((item) => item.isCompare === false).length === 0) resetGame();
+  if (initData.value.filter((item) => item.isCompare === false).length === 0)
+    setTimeout(() => resetGame(), 500);
 });
 onUnmounted(stopWatchRenderData);
 </script>
