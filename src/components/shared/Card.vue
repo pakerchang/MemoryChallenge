@@ -3,7 +3,7 @@ const props = defineProps<{
   data: GameDataType;
 }>();
 const emits = defineEmits<{
-  (e: "update", data: object): void;
+  (e: "update", data: GameDataType): void;
 }>();
 
 const handleClick = (): void => {
